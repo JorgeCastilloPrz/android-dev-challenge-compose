@@ -19,15 +19,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Snackbar
 import androidx.compose.material.SnackbarDuration
-import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
@@ -97,27 +91,6 @@ fun CountdownTimer(totalMinutes: Int, totalSeconds: Int) {
             }
         }
     }
-}
-
-@Composable
-fun DoneFeedback(snackbarState: SnackbarHostState) {
-    SnackbarHost(
-        hostState = snackbarState,
-        snackbar = { data ->
-            Snackbar(
-                modifier = Modifier.padding(16.dp),
-                content = {
-                    Text(
-                        text = data.message,
-                        style = MaterialTheme.typography.body2
-                    )
-                }
-            )
-        },
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight(Alignment.Bottom)
-    )
 }
 
 /**
