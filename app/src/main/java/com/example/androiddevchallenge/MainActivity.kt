@@ -25,36 +25,36 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.androiddevchallenge.ui.theme.CountdownTimerTheme
 
 class MainActivity : AppCompatActivity() {
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContent {
-      CountdownTimerTheme {
-        MyApp()
-      }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            CountdownTimerTheme {
+                MyApp()
+            }
+        }
     }
-  }
 }
 
 // Start building your app here!
 @Composable
 fun MyApp() {
-  Surface(color = MaterialTheme.colors.background) {
-    CountdownTimer(2, 30)
-  }
+    Surface(color = MaterialTheme.colors.background) {
+        CountdownTimer(2, 30)
+    }
 }
 
 @Preview("Light Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun LightPreview() {
-  CountdownTimerTheme {
-    MyApp()
-  }
+    CountdownTimerTheme {
+        MyApp()
+    }
 }
 
 @Preview("Dark Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun DarkPreview() {
-  CountdownTimerTheme(darkTheme = true) {
-    MyApp()
-  }
+    CountdownTimerTheme(darkTheme = true) {
+        MyApp()
+    }
 }
