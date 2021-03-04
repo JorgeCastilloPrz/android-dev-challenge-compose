@@ -40,57 +40,52 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun CountdownTimer(totalMinutes: Int, totalSeconds: Int) {
-    val scope = rememberCoroutineScope()
-    val snackbarState = remember { SnackbarHostState() }
-    val minutes = remember { mutableStateOf(totalMinutes) }
-    val seconds = remember { mutableStateOf(totalSeconds) }
+  val scope = rememberCoroutineScope()
+  val snackbarState = remember { SnackbarHostState() }
+  val minutes = remember { mutableStateOf(totalMinutes) }
+  val seconds = remember { mutableStateOf(totalSeconds) }
 
-    val state = elapsedTimeAsState(totalMinutes = minutes.value, totalSeconds = seconds.value)
+  val state = elapsedTimeAsState(totalMinutes = minutes.value, totalSeconds = seconds.value)
 
-    if (state.value == 0L) {
-        scope.launch {
-            snackbarState.showSnackbar("Time! ⌛️", duration = SnackbarDuration.Short)
-        }
+  if (state.value == 0L) {
+    scope.launch {
+      snackbarState.showSnackbar("Time! ⌛️", duration = SnackbarDuration.Short)
     }
+  }
 
-    DoneFeedback(snackbarState)
+  DoneFeedback(snackbarState)
 
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Countdown(totalTimeSeconds(minutes.value, seconds.value), state.value)
-            Row {
-                RoundedCornersButton(
-                    modifier = Modifier.padding(16.dp),
-                    icon = if (state.value == totalTimeSeconds(
-                            totalMinutes,
-                            totalSeconds
-                        ) || state.value == 0L
-                    ) {
-                        Icons.Filled.PlayArrow
-                    } else {
-                        Icons.Filled.Refresh
-                    },
-                    onClick = {
-                        minutes.value = totalMinutes
-                        seconds.value = totalSeconds
-                    }
-                )
+  val totalTimeSeconds = totalTimeSeconds(minutes.value, seconds.value)
 
-                RoundedCornersButton(
-                    modifier = Modifier.padding(16.dp),
-                    icon = Icons.Filled.Pause,
-                    enabled = state.value != totalTimeSeconds(
-                        totalMinutes,
-                        totalSeconds
-                    ) && state.value != 0L,
-                    onClick = {
-                        minutes.value = totalMinutes
-                        seconds.value = totalSeconds
-                    }
-                )
-            }
-        }
+  Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+      Countdown(totalTimeSeconds, state.value)
+      Row {
+        RoundedCornersButton(
+          modifier = Modifier.padding(16.dp),
+          icon = if (state.value == totalTimeSeconds || state.value == 0L) {
+            Icons.Filled.PlayArrow
+          } else {
+            Icons.Filled.Refresh
+          },
+          onClick = {
+            minutes.value = totalMinutes
+            seconds.value = totalSeconds
+          }
+        )
+
+        RoundedCornersButton(
+          modifier = Modifier.padding(16.dp),
+          icon = Icons.Filled.Pause,
+          enabled = state.value != totalTimeSeconds && state.value != 0L,
+          onClick = {
+            minutes.value = totalMinutes
+            seconds.value = totalSeconds
+          }
+        )
+      }
     }
+  }
 }
 
 /**
@@ -103,16 +98,16 @@ fun CountdownTimer(totalMinutes: Int, totalSeconds: Int) {
  */
 @Composable
 private fun elapsedTimeAsState(totalMinutes: Int, totalSeconds: Int): State<Long> {
-    val totalDurationSeconds = totalTimeSeconds(totalMinutes, totalSeconds)
-    val elapsedTimeState = remember { mutableStateOf(totalDurationSeconds) }
+  val totalDurationSeconds = totalTimeSeconds(totalMinutes, totalSeconds)
+  val elapsedTimeState = remember { mutableStateOf(totalDurationSeconds) }
 
-    LaunchedEffect(key1 = totalMinutes, key2 = totalSeconds) {
-        while (elapsedTimeState.value > 0) {
-            delay(1000)
-            elapsedTimeState.value -= 1
-        }
+  LaunchedEffect(key1 = totalMinutes, key2 = totalSeconds) {
+    while (elapsedTimeState.value > 0) {
+      delay(1000)
+      elapsedTimeState.value -= 1
     }
-    return elapsedTimeState
+  }
+  return elapsedTimeState
 }
 
 private fun totalTimeSeconds(minutes: Int, seconds: Int): Long = minutes * 60L + seconds
