@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.ui.theme.CountdownTimerTheme
 import com.example.androiddevchallenge.ui.theme.secondary
 import com.example.androiddevchallenge.ui.theme.secondaryLight
+import com.example.androiddevchallenge.ui.theme.text
 
 @Composable
 fun CountdownArc(totalTimeSeconds: Long, remainingTimeSeconds: Long) {
@@ -41,7 +41,7 @@ fun CountdownArc(totalTimeSeconds: Long, remainingTimeSeconds: Long) {
             .padding(8.dp),
         onDraw = {
             drawArc(
-                color = Color.Black,
+                color = text,
                 startAngle = 0f,
                 sweepAngle = 360f,
                 useCenter = false,
