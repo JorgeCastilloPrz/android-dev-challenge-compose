@@ -19,6 +19,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -49,13 +50,14 @@ fun CountdownArc(
     val currentColor: Color = lerp(secondaryLight, secondary, 1 - remainingPercent)
     onCurrentColorUpdate(currentColor)
 
+    val backArcColor = MaterialTheme.colors.surface
     Canvas(
         modifier = Modifier
             .aspectRatio(1f)
             .padding(8.dp),
         onDraw = {
             drawArc(
-                color = text,
+                color = backArcColor,
                 startAngle = 0f,
                 sweepAngle = 360f,
                 useCenter = false,

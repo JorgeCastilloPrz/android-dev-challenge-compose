@@ -20,8 +20,12 @@ import androidx.compose.ui.graphics.Color
 val primary = Color(0xFFe76f51)
 val background = Color(0xFF2a9d8f)
 val secondary = Color(0xFFe76f51)
-val secondaryLight = Color(0xFFf4a261)
+val secondaryLight = Color(0xffe9c46a)
 val buttons = Color(0xffe9c46a)
+val surface = Color(0xff264653)
 val text = Color(0xff264653)
 val buttonIcons = text
 val buttonIconsDisabled = buttonIcons.copy(alpha = 0.5f)
+
+val backgroundDark = Color(0xff264653)
+val surfaceDark = Color(0xFF2a9d8f)
