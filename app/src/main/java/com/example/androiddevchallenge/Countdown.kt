@@ -35,13 +35,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.ui.theme.CountdownTimerTheme
 import com.example.androiddevchallenge.ui.theme.primary
+import com.example.androiddevchallenge.ui.theme.secondaryLight
 import com.example.androiddevchallenge.ui.theme.text
 
 @Composable
 fun Countdown(totalTimeSeconds: Long, remainingTimeSeconds: Long) {
     val printableMinutes = remainingTimeSeconds / 60
     val printableSeconds = remainingTimeSeconds - printableMinutes * 60
-    val colorState = remember { mutableStateOf(primary) }
+    val colorState = remember { mutableStateOf(secondaryLight) }
     val animatedCircleColor = animateColorAsState(targetValue = colorState.value)
 
     Box(
