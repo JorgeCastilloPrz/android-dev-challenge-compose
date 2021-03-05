@@ -13,7 +13,7 @@
     <string name="content_description_play_button">Play Button. Click to start the countdown.</string>
     <string name="hint">Click on the bubble to set a timer! 👇</string>
     <string name="dialog_text">Insert the time for the countdown ⌛️</string>
-    <string name="dialog_button">go! 🚀</string>
+    <string name="dialog_button">Let\'s go! 🚀</string>
     <string name="dialog_minutes_label">Minutes</string>
     <string name="dialog_seconds_label">Seconds</string>
 </resources>

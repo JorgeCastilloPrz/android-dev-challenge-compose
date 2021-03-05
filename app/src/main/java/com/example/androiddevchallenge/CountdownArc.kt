@@ -25,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalDensity
@@ -68,7 +69,12 @@ fun CountdownArc(
                 startAngle = 0f,
                 sweepAngle = animatedSweep,
                 useCenter = false,
-                style = Stroke(width = arcWidth * 1.1f)
+                style = Stroke(
+                    width = arcWidth,
+                    pathEffect = PathEffect.dashPathEffect(
+                        floatArrayOf(15f, 10f)
+                    )
+                )
             )
         }
     )
