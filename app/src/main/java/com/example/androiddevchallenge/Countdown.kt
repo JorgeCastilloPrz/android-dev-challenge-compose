@@ -15,6 +15,7 @@
  */
 package com.example.androiddevchallenge
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,6 +24,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
@@ -31,24 +34,29 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.ui.theme.CountdownTimerTheme
+import com.example.androiddevchallenge.ui.theme.primary
 import com.example.androiddevchallenge.ui.theme.text
 
 @Composable
 fun Countdown(totalTimeSeconds: Long, remainingTimeSeconds: Long) {
     val printableMinutes = remainingTimeSeconds / 60
     val printableSeconds = remainingTimeSeconds - printableMinutes * 60
+    val colorState = remember { mutableStateOf(primary) }
+    val animatedCircleColor = animateColorAsState(targetValue = colorState.value)
 
     Box(
         modifier = Modifier.size(320.dp),
         contentAlignment = Alignment.Center,
     ) {
-        CountdownArc(totalTimeSeconds, remainingTimeSeconds)
+        CountdownArc(totalTimeSeconds, remainingTimeSeconds) { currentColor ->
+            colorState.value = currentColor
+        }
 
         Box(
             modifier = Modifier
                 .size(220.dp)
                 .clip(CircleShape)
-                .background(MaterialTheme.colors.primaryVariant),
+                .background(animatedCircleColor.value),
             contentAlignment = Alignment.Center
         ) {
             Column(horizontalAlignment = CenterHorizontally) {

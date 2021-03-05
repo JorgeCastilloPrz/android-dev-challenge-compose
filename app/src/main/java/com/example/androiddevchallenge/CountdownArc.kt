@@ -21,19 +21,34 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.lerp
+import androidx.core.graphics.blue
+import androidx.core.graphics.green
+import androidx.core.graphics.red
 import com.example.androiddevchallenge.ui.theme.CountdownTimerTheme
 import com.example.androiddevchallenge.ui.theme.secondary
 import com.example.androiddevchallenge.ui.theme.secondaryLight
 import com.example.androiddevchallenge.ui.theme.text
+import com.google.android.material.animation.ArgbEvaluatorCompat
 
+@OptIn(ExperimentalUnsignedTypes::class)
 @Composable
-fun CountdownArc(totalTimeSeconds: Long, remainingTimeSeconds: Long) {
+fun CountdownArc(
+    totalTimeSeconds: Long,
+    remainingTimeSeconds: Long,
+    onCurrentColorUpdate: (Color) -> Unit
+) {
     val remainingPercent = remainingTimeSeconds.toFloat() / totalTimeSeconds
     val arcWidth = with(LocalDensity.current) { 16.dp.toPx() }
+
+    val currentColor: Color = lerp(secondaryLight, secondary, 1- remainingPercent)
+    onCurrentColorUpdate(currentColor)
 
     Canvas(
         modifier = Modifier
@@ -63,6 +78,6 @@ fun CountdownArc(totalTimeSeconds: Long, remainingTimeSeconds: Long) {
 @Composable
 fun CountdownArcPreview() {
     CountdownTimerTheme {
-        CountdownArc(totalTimeSeconds = 150, remainingTimeSeconds = 100)
+        CountdownArc(totalTimeSeconds = 150, remainingTimeSeconds = 100) {}
     }
 }
