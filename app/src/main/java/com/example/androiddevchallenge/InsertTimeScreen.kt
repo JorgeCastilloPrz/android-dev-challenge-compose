@@ -35,6 +35,11 @@ fun InsertTimeScreen(state: MutableState<InsertedTimeState>) {
             .fillMaxSize()
             .padding(16.dp), contentAlignment = Alignment.Center
     ) {
+        val keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.NumberPassword,
+            imeAction = ImeAction.Done
+        )
+
         Card {
             Column(Modifier.padding(16.dp)) {
                 Text(stringResource(id = R.string.dialog_text))
@@ -44,17 +49,18 @@ fun InsertTimeScreen(state: MutableState<InsertedTimeState>) {
                             .weight(1f)
                             .padding(4.dp),
                         value = state.value.minutes.toString(),
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.NumberPassword,
-                            imeAction = ImeAction.Done
-                        ),
+                        keyboardOptions = keyboardOptions,
                         label = {
                             Text(
-                                text = "Minutes",
+                                text = stringResource(id = R.string.dialog_minutes_label),
                                 style = MaterialTheme.typography.body2
                             )
                         },
-                        onValueChange = { state.value = state.value.copy(minutes = it.toInt()) }
+                        onValueChange = {
+                            if (it.isNotEmpty()) {
+                                state.value = state.value.copy(minutes = it.toInt())
+                            }
+                        }
                     )
 
                     TextField(
@@ -62,17 +68,18 @@ fun InsertTimeScreen(state: MutableState<InsertedTimeState>) {
                             .weight(1f)
                             .padding(4.dp),
                         value = state.value.seconds.toString(),
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.NumberPassword,
-                            imeAction = ImeAction.Done
-                        ),
+                        keyboardOptions = keyboardOptions,
                         label = {
                             Text(
-                                text = "Seconds",
+                                text = stringResource(id = R.string.dialog_seconds_label),
                                 style = MaterialTheme.typography.body2
                             )
                         },
-                        onValueChange = { state.value = state.value.copy(seconds = it.toInt()) }
+                        onValueChange = {
+                            if (it.isNotEmpty()) {
+                                state.value = state.value.copy(seconds = it.toInt())
+                            }
+                        }
                     )
                 }
 
