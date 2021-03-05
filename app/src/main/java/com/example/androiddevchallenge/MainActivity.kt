@@ -20,17 +20,13 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.ui.theme.CountdownTimerTheme
@@ -49,7 +45,9 @@ class MainActivity : AppCompatActivity() {
 // Start building your app here!
 @Composable
 fun MyApp() {
-    val insertedTimeState = remember { mutableStateOf(InsertedTimeState(0, 30)) }
+    val insertedTimeState = remember {
+        mutableStateOf(InsertedTimeState(0, 30, false))
+    }
 
     Surface(color = MaterialTheme.colors.background) {
         Box(Modifier.padding(8.dp)) {
@@ -57,17 +55,7 @@ fun MyApp() {
                 if (showDialog) {
                     InsertTimeScreen(insertedTimeState)
                 } else {
-                    Card(Modifier.fillMaxWidth()) {
-                        Text(
-                            modifier = Modifier.padding(16.dp),
-                            text = stringResource(id = R.string.hint)
-                        )
-                    }
-
-                    CountdownTimer(
-                        insertedTimeState.value.minutes,
-                        insertedTimeState.value.seconds
-                    ) { insertedTimeState.value = insertedTimeState.value.copy(showDialog = true) }
+                    CountdownScreen(insertedTimeState)
                 }
             }
         }

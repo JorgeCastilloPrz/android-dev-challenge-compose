@@ -41,7 +41,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
-data class InsertedTimeState(val minutes: Int, val seconds: Int, val showDialog: Boolean = false)
+data class InsertedTimeState(val minutes: Int, val seconds: Int, val showDialog: Boolean)
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
