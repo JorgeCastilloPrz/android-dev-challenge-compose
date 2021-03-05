@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun MyApp() {
     Surface(color = MaterialTheme.colors.background) {
-        CountdownTimer(2, 30)
+        CountdownTimer(0, 10)
     }
 }
 

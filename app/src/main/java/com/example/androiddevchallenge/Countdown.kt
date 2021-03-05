@@ -16,6 +16,10 @@
 package com.example.androiddevchallenge
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateIntAsState
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,6 +28,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -55,9 +60,14 @@ fun Countdown(totalTimeSeconds: Long, remainingTimeSeconds: Long) {
             colorState.value = currentColor
         }
 
+        val animateBubbleSize by animateIntAsState(
+            targetValue = if (remainingTimeSeconds % 2 == 0L) 220 else 240,
+            animationSpec = infiniteRepeatable(tween(250), repeatMode = RepeatMode.Reverse)
+        )
+
         Box(
             modifier = Modifier
-                .size(220.dp)
+                .size(animateBubbleSize.dp)
                 .clip(CircleShape)
                 .background(animatedCircleColor.value),
             contentAlignment = Alignment.Center
