@@ -28,14 +28,10 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
-import androidx.core.graphics.blue
-import androidx.core.graphics.green
-import androidx.core.graphics.red
 import com.example.androiddevchallenge.ui.theme.CountdownTimerTheme
 import com.example.androiddevchallenge.ui.theme.secondary
 import com.example.androiddevchallenge.ui.theme.secondaryLight
 import com.example.androiddevchallenge.ui.theme.text
-import com.google.android.material.animation.ArgbEvaluatorCompat
 
 @OptIn(ExperimentalUnsignedTypes::class)
 @Composable
@@ -47,7 +43,7 @@ fun CountdownArc(
     val remainingPercent = remainingTimeSeconds.toFloat() / totalTimeSeconds
     val arcWidth = with(LocalDensity.current) { 16.dp.toPx() }
 
-    val currentColor: Color = lerp(secondaryLight, secondary, 1- remainingPercent)
+    val currentColor: Color = lerp(secondaryLight, secondary, 1 - remainingPercent)
     onCurrentColorUpdate(currentColor)
 
     Canvas(
