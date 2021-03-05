@@ -23,19 +23,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
-    primary = egg,
-    primaryVariant = egg,
+    primary = primary,
+    primaryVariant = primary,
     secondary = Color.White,
-    background = eggLight,
+    background = background,
     surface = Color.White,
     onPrimary = Color.Black,
 )
 
 private val LightColorPalette = lightColors(
-    primary = egg,
-    primaryVariant = egg,
+    primary = primary,
+    primaryVariant = primary,
     secondary = Color.White,
-    background = eggLight,
+    background = background,
     surface = Color.White,
     onPrimary = Color.Black
 

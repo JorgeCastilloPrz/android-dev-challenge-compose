@@ -29,8 +29,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.ui.theme.CountdownTimerTheme
-import com.example.androiddevchallenge.ui.theme.egg
-import com.example.androiddevchallenge.ui.theme.eggBright
+import com.example.androiddevchallenge.ui.theme.primary
+import com.example.androiddevchallenge.ui.theme.primaryLight
 import kotlin.math.atan
 
 @Composable
@@ -54,7 +54,7 @@ fun CountdownArc(totalTimeSeconds: Long, remainingTimeSeconds: Long) {
             val capOffset = degreesRequiredForStrokeCap(arcWidth * 1.1f)
 
             drawArc(
-                brush = Brush.sweepGradient(listOf(eggBright, egg)),
+                brush = Brush.sweepGradient(listOf(primaryLight, primary)),
                 startAngle = capOffset,
                 sweepAngle = remainingPercent * 360f - capOffset,
                 useCenter = false,

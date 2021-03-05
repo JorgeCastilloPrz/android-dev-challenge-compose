@@ -17,6 +17,6 @@ package com.example.androiddevchallenge.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val egg = Color(0xFFf5a945)
-val eggLight = Color(0xFFF8B956)
-val eggBright = Color(0xFFfed36f)
+val primary = Color(0xFFf5a945)
+val background = Color(0xFFF8B956)
+val primaryLight = Color(0xFFfed36f)

@@ -15,6 +15,7 @@
  */
 package com.example.androiddevchallenge
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -34,11 +35,11 @@ import androidx.compose.ui.unit.dp
 fun RoundedCornersButton(
     icon: ImageVector,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
     enabled: Boolean = true
 ) {
     Button(
-        modifier = modifier
+        modifier = Modifier
+            .padding(16.dp)
             .size(56.dp)
             .shadow(1.dp, RoundedCornerShape(CornerSize(16.dp)))
             .clip(RoundedCornerShape(CornerSize(16.dp))),
