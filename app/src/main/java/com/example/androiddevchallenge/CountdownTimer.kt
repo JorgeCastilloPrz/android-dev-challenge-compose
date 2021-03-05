@@ -54,21 +54,21 @@ fun CountdownTimer(totalMinutes: Int, totalSeconds: Int) {
     val seconds = remember { mutableStateOf(totalSeconds) }
 
     val totalDurationSeconds = totalTimeSeconds(minutes.value, seconds.value)
-    val remainingTimeState = remember { mutableStateOf(totalDurationSeconds) }
+    var remainingTime by remember { mutableStateOf(totalDurationSeconds) }
     var timerState by remember { mutableStateOf(Paused) }
 
     fun startCounter(fromLatestValue: Boolean = false) {
-        val initialValue = if (fromLatestValue) remainingTimeState.value else totalDurationSeconds
+        val initialValue = if (fromLatestValue) remainingTime else totalDurationSeconds
         timerState = Running
         previousTimerJob?.cancel() // Cancel previous ongoing Job when restarting - no leaks.
         scope.launch {
             val startTime = withFrameMillis { it }
-            if (remainingTimeState.value == 0L) {
-                remainingTimeState.value = initialValue
+            if (remainingTime == 0L) {
+                remainingTime = initialValue
             }
-            while (remainingTimeState.value > 0 && timerState != Paused) {
+            while (remainingTime > 0 && timerState != Paused) {
                 val elapsedTime = (withFrameMillis { it } - startTime) / 1000
-                remainingTimeState.value = initialValue - elapsedTime
+                remainingTime = initialValue - elapsedTime
             }
         }
     }
@@ -81,7 +81,7 @@ fun CountdownTimer(totalMinutes: Int, totalSeconds: Int) {
         }
     }
 
-    if (remainingTimeState.value == 0L) {
+    if (remainingTime == 0L) {
         scope.launch {
             snackbarState.showSnackbar("Time! ⌛️", duration = SnackbarDuration.Short)
         }
@@ -93,10 +93,10 @@ fun CountdownTimer(totalMinutes: Int, totalSeconds: Int) {
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Countdown(totalTimeSeconds, remainingTimeState.value)
+            Countdown(totalTimeSeconds, remainingTime)
             Row {
                 RoundedCornersButton(
-                    icon = if (remainingTimeState.value == totalTimeSeconds || remainingTimeState.value == 0L) {
+                    icon = if (remainingTime == totalTimeSeconds || remainingTime == 0L) {
                         Icons.Filled.PlayArrow
                     } else {
                         Icons.Filled.Replay
@@ -108,7 +108,7 @@ fun CountdownTimer(totalMinutes: Int, totalSeconds: Int) {
 
                 RoundedCornersButton(
                     icon = if (timerState == Running) Icons.Filled.PauseCircle else Icons.Outlined.PlayCircle,
-                    enabled = remainingTimeState.value != totalTimeSeconds && remainingTimeState.value != 0L,
+                    enabled = remainingTime != totalTimeSeconds && remainingTime != 0L,
                     onClick = {
                         toggleTimerState()
                     }
