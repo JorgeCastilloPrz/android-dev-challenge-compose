@@ -15,6 +15,7 @@
  */
 package com.example.androiddevchallenge
 
+import androidx.annotation.StringRes
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -51,52 +52,33 @@ fun InsertTimeScreen(state: MutableState<InsertedTimeState>) {
             .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
-        val keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.NumberPassword,
-            imeAction = ImeAction.Done
-        )
-
         Card {
             Column(Modifier.padding(16.dp)) {
                 Text(stringResource(id = R.string.dialog_text))
                 Row(Modifier.padding(top = 8.dp)) {
-                    TextField(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(4.dp),
-                        value = state.value.minutes.toString(),
-                        keyboardOptions = keyboardOptions,
-                        label = {
-                            Text(
-                                text = stringResource(id = R.string.dialog_minutes_label),
-                                style = MaterialTheme.typography.body2
-                            )
-                        },
-                        onValueChange = {
-                            if (it.isNotEmpty()) {
-                                state.value = state.value.copy(minutes = it.toInt())
-                            }
-                        }
-                    )
+                    val inputModifier = Modifier
+                        .weight(1f)
+                        .padding(4.dp)
 
-                    TextField(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(4.dp),
-                        value = state.value.seconds.toString(),
-                        keyboardOptions = keyboardOptions,
-                        label = {
-                            Text(
-                                text = stringResource(id = R.string.dialog_seconds_label),
-                                style = MaterialTheme.typography.body2
-                            )
-                        },
-                        onValueChange = {
-                            if (it.isNotEmpty()) {
-                                state.value = state.value.copy(seconds = it.toInt())
-                            }
+                    TimeInput(
+                        state.value.minutes.toString(),
+                        R.string.dialog_minutes_label,
+                        inputModifier
+                    ) {
+                        if (it.isNotEmpty() && it.length <= 2) {
+                            state.value = state.value.copy(minutes = it.toInt())
                         }
-                    )
+                    }
+
+                    TimeInput(
+                        state.value.seconds.toString(),
+                        R.string.dialog_seconds_label,
+                        inputModifier
+                    ) {
+                        if (it.isNotEmpty() && it.length <= 2) {
+                            state.value = state.value.copy(seconds = it.toInt())
+                        }
+                    }
                 }
 
                 Divider(
@@ -114,4 +96,31 @@ fun InsertTimeScreen(state: MutableState<InsertedTimeState>) {
             }
         }
     }
+}
+
+@Composable
+fun TimeInput(
+    text: String,
+    @StringRes labelRes: Int,
+    modifier: Modifier = Modifier,
+    onValueChange: (String) -> Unit
+) {
+    val keyboardOptions = KeyboardOptions(
+        keyboardType = KeyboardType.NumberPassword,
+        imeAction = ImeAction.Done
+    )
+
+    TextField(
+        modifier = modifier,
+        maxLines = 1,
+        value = text,
+        keyboardOptions = keyboardOptions,
+        label = {
+            Text(
+                text = stringResource(id = labelRes),
+                style = MaterialTheme.typography.body2
+            )
+        },
+        onValueChange = onValueChange
+    )
 }
