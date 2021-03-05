@@ -60,7 +60,7 @@ fun CountdownTimer(totalMinutes: Int, totalSeconds: Int, onTimerClick: () -> Uni
     fun startCounter(fromLatestValue: Boolean = false) {
         val initialValue = if (fromLatestValue) remainingTime else totalDurationSeconds
         timerState = Running
-        previousTimerJob?.cancel() // Cancel previous ongoing Job when restarting - no leaks.
+        previousTimerJob?.cancel() // Cancel previous ongoing Job when restarting - no leaking.
         scope.launch {
             val startTime = withFrameMillis { it }
             if (remainingTime == 0L) {
@@ -96,7 +96,7 @@ fun CountdownTimer(totalMinutes: Int, totalSeconds: Int, onTimerClick: () -> Uni
             Countdown(totalTimeSeconds, remainingTime, onTimerClick)
             Row {
                 RoundedCornersButton(
-                    icon = if (remainingTime == totalTimeSeconds || remainingTime == 0L) {
+                    icon = if (remainingTime == totalTimeSeconds) {
                         Icons.Filled.PlayArrow
                     } else {
                         Icons.Filled.Replay
