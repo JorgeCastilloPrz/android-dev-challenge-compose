@@ -15,6 +15,8 @@
  */
 package com.example.androiddevchallenge
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -29,22 +31,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun DoneFeedback(snackbarState: SnackbarHostState) {
-    SnackbarHost(
-        hostState = snackbarState,
-        snackbar = { data ->
-            Snackbar(
-                modifier = Modifier.padding(16.dp),
-                content = {
-                    Text(
-                        text = data.message,
-                        style = MaterialTheme.typography.body2
-                    )
-                }
-            )
-        },
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight(Alignment.Bottom)
-    )
+fun DoneFeedback(modifier: Modifier = Modifier, snackbarState: SnackbarHostState) {
+    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter) {
+        SnackbarHost(
+            hostState = snackbarState,
+            snackbar = { data ->
+                Snackbar(
+                    modifier = Modifier.padding(16.dp),
+                    content = {
+                        Text(
+                            text = data.message,
+                            style = MaterialTheme.typography.body2
+                        )
+                    }
+                )
+            },
+            modifier = modifier
+                .fillMaxWidth()
+                .wrapContentHeight(Alignment.Bottom)
+        )
+    }
 }

@@ -87,7 +87,7 @@ fun CountdownTimer(totalMinutes: Int, totalSeconds: Int, onTimerClick: () -> Uni
         }
     }
 
-    DoneFeedback(snackbarState)
+    DoneFeedback(snackbarState = snackbarState)
 
     val totalTimeSeconds = totalTimeSeconds(minutes.value, seconds.value)
 
