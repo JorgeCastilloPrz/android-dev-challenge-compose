@@ -17,6 +17,9 @@ package com.example.androiddevchallenge.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val primary = Color(0xFFf5a945)
-val background = Color(0xFFF8B956)
-val primaryLight = Color(0xFFfed36f)
+val primary = Color(0xFFe76f51)
+val background = Color(0xFF2a9d8f)
+val secondary = Color(0xFFe76f51)
+val secondaryLight = Color(0xFFf4a261)
+val buttons = Color(0xffe9c46a)
+val text = Color(0xff264653)

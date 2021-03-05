@@ -27,8 +27,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.ui.theme.CountdownTimerTheme
-import com.example.androiddevchallenge.ui.theme.primary
-import com.example.androiddevchallenge.ui.theme.primaryLight
+import com.example.androiddevchallenge.ui.theme.secondary
+import com.example.androiddevchallenge.ui.theme.secondaryLight
 
 @Composable
 fun CountdownArc(totalTimeSeconds: Long, remainingTimeSeconds: Long) {
@@ -49,7 +49,7 @@ fun CountdownArc(totalTimeSeconds: Long, remainingTimeSeconds: Long) {
             )
 
             drawArc(
-                brush = Brush.sweepGradient(listOf(primaryLight, primary)),
+                brush = Brush.sweepGradient(listOf(secondary, secondaryLight)),
                 startAngle = 0f,
                 sweepAngle = remainingPercent * 360f,
                 useCenter = false,

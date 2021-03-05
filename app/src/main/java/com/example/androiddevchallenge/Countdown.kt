@@ -31,6 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.ui.theme.CountdownTimerTheme
+import com.example.androiddevchallenge.ui.theme.text
 
 @Composable
 fun Countdown(totalTimeSeconds: Long, remainingTimeSeconds: Long) {
@@ -53,9 +54,10 @@ fun Countdown(totalTimeSeconds: Long, remainingTimeSeconds: Long) {
             Column(horizontalAlignment = CenterHorizontally) {
                 Text(
                     "${printableMinutes}m ${printableSeconds}s",
-                    style = MaterialTheme.typography.h4.copy(fontWeight = FontWeight.Black)
+                    style = MaterialTheme.typography.h4.copy(fontWeight = FontWeight.Black),
+                    color = text
                 )
-                Text("LEFT", style = MaterialTheme.typography.button)
+                Text("LEFT", style = MaterialTheme.typography.button, color = text)
             }
         }
     }
