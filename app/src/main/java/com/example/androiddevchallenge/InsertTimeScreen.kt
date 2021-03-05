@@ -1,9 +1,6 @@
 package com.example.androiddevchallenge
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.slideIn
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -33,65 +30,63 @@ data class InsertedTimeState(val minutes: Int, val seconds: Int, val showDialog:
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun InsertTimeScreen(state: MutableState<InsertedTimeState>) {
-    AnimatedVisibility(visible = state.value.showDialog) {
-        Box(
-            Modifier
-                .fillMaxSize()
-                .padding(16.dp), contentAlignment = Alignment.Center
-        ) {
-            Card {
-                Column(Modifier.padding(16.dp)) {
-                    Text(stringResource(id = R.string.dialog_text))
-                    Row(Modifier.padding(top = 8.dp)) {
-                        TextField(
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(4.dp),
-                            value = state.value.minutes.toString(),
-                            keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.NumberPassword,
-                                imeAction = ImeAction.Done
-                            ),
-                            label = {
-                                Text(
-                                    text = "Minutes",
-                                    style = MaterialTheme.typography.body2
-                                )
-                            },
-                            onValueChange = { state.value = state.value.copy(minutes = it.toInt()) }
-                        )
-
-                        TextField(
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(4.dp),
-                            value = state.value.seconds.toString(),
-                            keyboardOptions = KeyboardOptions(
-                                keyboardType = KeyboardType.NumberPassword,
-                                imeAction = ImeAction.Done
-                            ),
-                            label = {
-                                Text(
-                                    text = "Seconds",
-                                    style = MaterialTheme.typography.body2
-                                )
-                            },
-                            onValueChange = { state.value = state.value.copy(seconds = it.toInt()) }
-                        )
-                    }
-
-                    Divider(
-                        Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
-                        color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f)
+    Box(
+        Modifier
+            .fillMaxSize()
+            .padding(16.dp), contentAlignment = Alignment.Center
+    ) {
+        Card {
+            Column(Modifier.padding(16.dp)) {
+                Text(stringResource(id = R.string.dialog_text))
+                Row(Modifier.padding(top = 8.dp)) {
+                    TextField(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(4.dp),
+                        value = state.value.minutes.toString(),
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.NumberPassword,
+                            imeAction = ImeAction.Done
+                        ),
+                        label = {
+                            Text(
+                                text = "Minutes",
+                                style = MaterialTheme.typography.body2
+                            )
+                        },
+                        onValueChange = { state.value = state.value.copy(minutes = it.toInt()) }
                     )
-                    Button(
-                        onClick = { state.value = state.value.copy(showDialog = false) },
-                        shape = RectangleShape,
-                        contentPadding = PaddingValues(16.dp),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(stringResource(id = R.string.dialog_button))
-                    }
+
+                    TextField(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(4.dp),
+                        value = state.value.seconds.toString(),
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.NumberPassword,
+                            imeAction = ImeAction.Done
+                        ),
+                        label = {
+                            Text(
+                                text = "Seconds",
+                                style = MaterialTheme.typography.body2
+                            )
+                        },
+                        onValueChange = { state.value = state.value.copy(seconds = it.toInt()) }
+                    )
+                }
+
+                Divider(
+                    Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                    color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f)
+                )
+                Button(
+                    onClick = { state.value = state.value.copy(showDialog = false) },
+                    shape = RectangleShape,
+                    contentPadding = PaddingValues(16.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(stringResource(id = R.string.dialog_button))
                 }
             }
         }

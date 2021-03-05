@@ -18,6 +18,7 @@ package com.example.androiddevchallenge
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -52,20 +53,22 @@ fun MyApp() {
 
     Surface(color = MaterialTheme.colors.background) {
         Box(Modifier.padding(8.dp)) {
-            if (insertedTimeState.value.showDialog) {
-                InsertTimeScreen(insertedTimeState)
-            } else {
-                Card(Modifier.fillMaxWidth()) {
-                    Text(
-                        modifier = Modifier.padding(16.dp),
-                        text = stringResource(id = R.string.hint)
-                    )
-                }
+            Crossfade(targetState = insertedTimeState.value.showDialog) { showDialog ->
+                if (showDialog) {
+                    InsertTimeScreen(insertedTimeState)
+                } else {
+                    Card(Modifier.fillMaxWidth()) {
+                        Text(
+                            modifier = Modifier.padding(16.dp),
+                            text = stringResource(id = R.string.hint)
+                        )
+                    }
 
-                CountdownTimer(
-                    insertedTimeState.value.minutes,
-                    insertedTimeState.value.seconds
-                ) { insertedTimeState.value = insertedTimeState.value.copy(showDialog = true) }
+                    CountdownTimer(
+                        insertedTimeState.value.minutes,
+                        insertedTimeState.value.seconds
+                    ) { insertedTimeState.value = insertedTimeState.value.copy(showDialog = true) }
+                }
             }
         }
     }
