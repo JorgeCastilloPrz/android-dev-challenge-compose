@@ -15,10 +15,12 @@
  */
 package com.example.androiddevchallenge
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -41,6 +43,8 @@ fun CountdownArc(
     onCurrentColorUpdate: (Color) -> Unit
 ) {
     val remainingPercent = remainingTimeSeconds.toFloat() / totalTimeSeconds
+    val animatedSweep by animateFloatAsState(targetValue = remainingPercent * 360f)
+
     val arcWidth = with(LocalDensity.current) { 16.dp.toPx() }
 
     val currentColor: Color = lerp(secondaryLight, secondary, 1 - remainingPercent)
@@ -62,7 +66,7 @@ fun CountdownArc(
             drawArc(
                 brush = Brush.sweepGradient(listOf(secondary, secondaryLight)),
                 startAngle = 0f,
-                sweepAngle = remainingPercent * 360f,
+                sweepAngle = animatedSweep,
                 useCenter = false,
                 style = Stroke(width = arcWidth * 1.1f)
             )
