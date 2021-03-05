@@ -33,7 +33,6 @@ import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.ui.theme.CountdownTimerTheme
 import com.example.androiddevchallenge.ui.theme.secondary
 import com.example.androiddevchallenge.ui.theme.secondaryLight
-import com.example.androiddevchallenge.ui.theme.text
 
 @OptIn(ExperimentalUnsignedTypes::class)
 @Composable
