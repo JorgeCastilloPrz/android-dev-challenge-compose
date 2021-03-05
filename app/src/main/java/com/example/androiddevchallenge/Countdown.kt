@@ -30,11 +30,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.androiddevchallenge.ui.theme.CountdownTimerTheme
-import com.example.androiddevchallenge.ui.theme.primary
 import com.example.androiddevchallenge.ui.theme.secondaryLight
 import com.example.androiddevchallenge.ui.theme.text
 
@@ -61,9 +63,18 @@ fun Countdown(totalTimeSeconds: Long, remainingTimeSeconds: Long) {
             contentAlignment = Alignment.Center
         ) {
             Column(horizontalAlignment = CenterHorizontally) {
+                val timeText = with(AnnotatedString.Builder("$printableMinutes")) {
+                    pushStyle(SpanStyle(fontSize = 24.sp))
+                    append("m")
+                    pop()
+                    append(" $printableSeconds")
+                    pushStyle(SpanStyle(fontSize = 24.sp))
+                    append("s")
+                    toAnnotatedString()
+                }
                 Text(
-                    "${printableMinutes}m ${printableSeconds}s",
-                    style = MaterialTheme.typography.h4.copy(fontWeight = FontWeight.Black),
+                    timeText,
+                    style = MaterialTheme.typography.h3.copy(fontWeight = FontWeight.Black),
                     color = text
                 )
                 Text("LEFT", style = MaterialTheme.typography.button, color = text)
