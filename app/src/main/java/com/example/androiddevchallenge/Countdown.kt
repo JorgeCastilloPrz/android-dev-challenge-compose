@@ -56,6 +56,7 @@ fun Countdown(totalTimeSeconds: Long, remainingTimeSeconds: Long, onTimerClick: 
     Box(
         modifier = Modifier
             .size(320.dp)
+            .clip(CircleShape)
             .clickable { onTimerClick() },
         contentAlignment = Alignment.Center,
     ) {
