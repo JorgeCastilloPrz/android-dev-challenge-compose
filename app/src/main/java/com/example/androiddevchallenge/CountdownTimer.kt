@@ -45,7 +45,7 @@ enum class TimerState {
 }
 
 @Composable
-fun CountdownTimer(totalMinutes: Int, totalSeconds: Int) {
+fun CountdownTimer(totalMinutes: Int, totalSeconds: Int, onTimerClick: () -> Unit) {
     val scope = rememberCoroutineScope()
     val previousTimerJob by remember { mutableStateOf<Job?>(null) }
 
@@ -93,7 +93,7 @@ fun CountdownTimer(totalMinutes: Int, totalSeconds: Int) {
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Countdown(totalTimeSeconds, remainingTime)
+            Countdown(totalTimeSeconds, remainingTime, onTimerClick)
             Row {
                 RoundedCornersButton(
                     icon = if (remainingTime == totalTimeSeconds || remainingTime == 0L) {

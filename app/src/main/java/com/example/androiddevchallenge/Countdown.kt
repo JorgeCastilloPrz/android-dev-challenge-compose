@@ -21,6 +21,7 @@ import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
@@ -46,14 +47,16 @@ import com.example.androiddevchallenge.ui.theme.secondaryLight
 import com.example.androiddevchallenge.ui.theme.text
 
 @Composable
-fun Countdown(totalTimeSeconds: Long, remainingTimeSeconds: Long) {
+fun Countdown(totalTimeSeconds: Long, remainingTimeSeconds: Long, onTimerClick: () -> Unit) {
     val printableMinutes = remainingTimeSeconds / 60
     val printableSeconds = remainingTimeSeconds - printableMinutes * 60
     val colorState = remember { mutableStateOf(secondaryLight) }
     val animatedCircleColor = animateColorAsState(targetValue = colorState.value)
 
     Box(
-        modifier = Modifier.size(320.dp),
+        modifier = Modifier
+            .size(320.dp)
+            .clickable { onTimerClick() },
         contentAlignment = Alignment.Center,
     ) {
         CountdownArc(totalTimeSeconds, remainingTimeSeconds) { currentColor ->
@@ -97,6 +100,6 @@ fun Countdown(totalTimeSeconds: Long, remainingTimeSeconds: Long) {
 @Composable
 fun CountDownPreview() {
     CountdownTimerTheme {
-        Countdown(totalTimeSeconds = 150, remainingTimeSeconds = 100)
+        Countdown(totalTimeSeconds = 150, remainingTimeSeconds = 100) {}
     }
 }
