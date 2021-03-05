@@ -23,3 +23,5 @@ val secondary = Color(0xFFe76f51)
 val secondaryLight = Color(0xFFf4a261)
 val buttons = Color(0xffe9c46a)
 val text = Color(0xff264653)
+val buttonIcons = text
+val buttonIconsDisabled = buttonIcons.copy(alpha = 0.5f)

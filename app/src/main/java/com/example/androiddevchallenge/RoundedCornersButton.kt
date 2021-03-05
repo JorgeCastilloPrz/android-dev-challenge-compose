@@ -29,6 +29,8 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.androiddevchallenge.ui.theme.buttonIcons
+import com.example.androiddevchallenge.ui.theme.buttonIconsDisabled
 import com.example.androiddevchallenge.ui.theme.buttons
 
 @Composable
@@ -49,7 +51,9 @@ fun RoundedCornersButton(
         enabled = enabled,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = buttons,
-            disabledBackgroundColor = buttons
+            disabledBackgroundColor = buttons,
+            contentColor = buttonIcons,
+            disabledContentColor = buttonIconsDisabled
         )
     ) {
         Icon(
